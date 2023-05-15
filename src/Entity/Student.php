@@ -15,12 +15,16 @@ class Student
     #[ORM\OneToMany(mappedBy: 'student', targetEntity: Phone::class, cascade: ["persist", "remove"])]
     private Collection $phones;
 
+    #[ORM\ManyToMany(targetEntity: Course::class, inversedBy: 'students')]
+    private Collection $courses;
+
     public function __construct(
         #[ORM\Column(type: 'string')]
         private string $name
     )
     {
         $this->phones = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 
     public function getId(): int
@@ -51,6 +55,25 @@ class Student
 
         $this->phones->add($phone);
         $phone->setStudent($this);
+    }
+
+    /**
+     * @return Collection<Course>
+     */
+    public function getCourses(): Collection
+    {
+        return $this->courses;
+    }
+
+    /**
+     * @param Course $course
+     */
+    public function addCourse(Course $course): void
+    {
+        if ($this->courses->contains($course)) return;
+
+        $this->courses->add($course);
+        $course->addStudent($this);
     }
 
 }
