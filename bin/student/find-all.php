@@ -6,10 +6,13 @@ use JGabrielrc\DoctrineCourse\Helper\EntityManagerFactory;
 require_once 'vendor/autoload.php';
 
 $entityManager = EntityManagerFactory::create();
-$studentRepository = $entityManager->getRepository(Student::class);
+$dql = 'SELECT student, phone, course 
+        FROM JGabrielrc\DoctrineCourse\Entity\Student student 
+        LEFT JOIN student.phones phone
+        LEFT JOIN student.courses course';
 
 /** @var Student[] $students */
-$students = $studentRepository->findAll();
+$students = $entityManager->createQuery($dql)->getResult();
 
 foreach ($students as $student) {
     echo "ID: {$student->getId()}" . PHP_EOL;

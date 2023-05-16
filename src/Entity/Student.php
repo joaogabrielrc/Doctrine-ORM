@@ -12,7 +12,12 @@ class Student
     #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'student', targetEntity: Phone::class, cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(
+        mappedBy: 'student',
+        targetEntity: Phone::class,
+        cascade: ["persist", "remove"],
+        fetch: "EAGER"
+    )]
     private Collection $phones;
 
     #[ORM\ManyToMany(targetEntity: Course::class, inversedBy: 'students')]
