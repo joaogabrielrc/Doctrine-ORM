@@ -41,11 +41,21 @@ class EntityManagerFactory
             )
         ]);
 
+        $cacheDirectory = __DIR__ . '/../../var/cache';
+
         $config->setMetadataCache(
             new PhpFilesAdapter(
                 namespace: 'metadata_cache',
                 defaultLifetime: 0,
-                directory: __DIR__ . '/../../var/cache'
+                directory: $cacheDirectory
+            )
+        );
+
+        $config->setQueryCache(
+            new PhpFilesAdapter(
+                namespace: 'query_cache',
+                defaultLifetime: 0,
+                directory: $cacheDirectory
             )
         );
 
