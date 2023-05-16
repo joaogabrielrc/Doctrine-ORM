@@ -8,6 +8,8 @@ use Doctrine\DBAL\Logging\Middleware;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\MissingMappingDriverImplementation;
 use Doctrine\ORM\ORMSetup;
+use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
+use Symfony\Component\Cache\Exception\CacheException;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,6 +20,7 @@ class EntityManagerFactory
     /**
      * @throws MissingMappingDriverImplementation
      * @throws Exception
+     * @throws CacheException
      */
     public static function create(): EntityManager
     {
@@ -27,6 +30,7 @@ class EntityManagerFactory
             paths: array(__DIR__ . "/.."),
             isDevMode: true,
         );
+
         $config->setMiddlewares([
             new Middleware(
                 new ConsoleLogger(
@@ -36,6 +40,14 @@ class EntityManagerFactory
                 )
             )
         ]);
+
+        $config->setMetadataCache(
+            new PhpFilesAdapter(
+                namespace: 'metadata_cache',
+                defaultLifetime: 0,
+                directory: __DIR__ . '/../../var/cache'
+            )
+        );
 
         $connection = DriverManager::getConnection([
             'dbname' => $env['DATABASE_NAME'],

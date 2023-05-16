@@ -1,0 +1,113 @@
+<?php //JGabrielrc__DoctrineCourse__Entity__Course__CLASSMETADATA__
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (($p = &Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\SequenceGenerator'] ?? Registry::p('Doctrine\\ORM\\Id\\SequenceGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'JGabrielrc\\DoctrineCourse\\Entity\\Course',
+            ],
+            'namespace' => [
+                'JGabrielrc\\DoctrineCourse\\Entity',
+            ],
+            'rootEntityName' => [
+                'JGabrielrc\\DoctrineCourse\\Entity\\Course',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                2,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => null,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => null,
+                        'id' => true,
+                        'columnName' => 'id',
+                    ],
+                    'name' => [
+                        'fieldName' => 'name',
+                        'type' => 'string',
+                        'scale' => null,
+                        'length' => null,
+                        'unique' => true,
+                        'nullable' => false,
+                        'precision' => null,
+                        'columnName' => 'name',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                    'name' => 'name',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                    'name' => 'name',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'courses',
+                ],
+            ],
+            'associationMappings' => [
+                [
+                    'students' => [
+                        'fieldName' => 'students',
+                        'joinTable' => [],
+                        'targetEntity' => 'JGabrielrc\\DoctrineCourse\\Entity\\Student',
+                        'mappedBy' => 'courses',
+                        'inversedBy' => null,
+                        'cascade' => [],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 8,
+                        'isOwningSide' => false,
+                        'sourceEntity' => 'JGabrielrc\\DoctrineCourse\\Entity\\Course',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                    ],
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+            'sequenceGeneratorDefinition' => [
+                [
+                    'sequenceName' => 'courses_id_seq',
+                    'allocationSize' => '1',
+                    'initialValue' => '1',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    [
+        -1 => [
+            'allocationSize' => 1,
+            'sequenceName' => 'courses_id_seq',
+        ],
+    ]
+);
