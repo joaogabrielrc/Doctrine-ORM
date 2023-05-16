@@ -5,8 +5,12 @@ namespace JGabrielrc\DoctrineCourse\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JGabrielrc\DoctrineCourse\Repository\StudentRepository;
 
-#[ORM\Entity, ORM\Table(name: 'students')]
+#[
+    ORM\Entity(repositoryClass: StudentRepository::class),
+    ORM\Table(name: 'students')
+]
 class Student
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: 'integer')]
